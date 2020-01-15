@@ -1,14 +1,16 @@
 package rocks.zipcode.io.quiz4.collections;
 import java.util.*;
+import java.util.function.Consumer;
+
 /**
  * @author leon on 11/12/2018.
  */
-public class SimpleStringGroup {
+public class SimpleStringGroup implements Iterable{
     private ArrayList<String> strings = new ArrayList<>();
 
-    public SimpleStringGroup() {
+    public SimpleStringGroup(String... args) {
 //        throw new UnsupportedOperationException("Method not yet implemented");
-    this.strings = new ArrayList<String>();
+    this.strings = new ArrayList<String>(Arrays.asList(args));
     }
 
     public Integer count() {
@@ -33,5 +35,22 @@ public class SimpleStringGroup {
 
     public void clear() {
         this.strings.clear();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return this.strings.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer action) {
+        {
+            for (int i = 0; i < this.strings.size(); i++)
+                action.accept(this.strings.get(i)); }
+    }
+
+    @Override
+    public Spliterator spliterator() {
+        return this.strings.spliterator();
     }
 }
