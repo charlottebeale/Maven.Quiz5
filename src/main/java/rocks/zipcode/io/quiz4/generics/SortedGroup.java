@@ -1,16 +1,26 @@
 package rocks.zipcode.io.quiz4.generics;
 import java.util.*;
-import java.util.ArrayList;
 import java.lang.*;
 /**
  * @author leon on 18/12/2018.
  */
-public class SortedGroup<T> extends Group<T> {
+public class SortedGroup<T extends Comparable<T>> extends Group<T> {
     private ArrayList<T> list = new ArrayList<>();
 
     @Override
     public void insert(T value) {
+        if (this.list.size() == 0) {
             this.list.add(value);
+        } else {
+            for (int i = 0; i < this.list.size(); i++) {
+                if (value.compareTo(this.list.get(i)) < 0) {
+                    this.list.add(i, value);
+                    break;
+                }
+            }
+        }
+
+
     }
 
     @Override
